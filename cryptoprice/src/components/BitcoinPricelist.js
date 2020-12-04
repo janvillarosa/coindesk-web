@@ -46,7 +46,7 @@ export class BitcoinPricelist extends Component {
   };
 
   InitialiseHub = () => {
-    const hubConnection = new SignalR.HubConnectionBuilder().withUrl("https:///localhost:5001/btchub").build();
+    const hubConnection = new SignalR.HubConnectionBuilder().withUrl("https:///localhost:5001/coinhub").build();
 
     this.setState({ hubConnection }, () => {
       this.state.hubConnection
@@ -57,11 +57,12 @@ export class BitcoinPricelist extends Component {
       this.state.hubConnection.on('ReceivePrice', (recievedPrice) => {
         const price = `${parseFloat(recievedPrice.value).toFixed(2)}`;
         const date = moment(recievedPrice.date).format('LT');
+        const coin = recievedPrice.currency;
         const prices = this.state.prices;
         if (prices.length === 5) {
           prices.shift();
         }
-        prices.push([price, date]);
+        prices.push([price, date, coin]);
         this.setState({ prices: prices });
       })
     })
@@ -96,7 +97,7 @@ export class BitcoinPricelist extends Component {
             <Card className={classes.root}>
               <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  1 Bitcoin equals
+                  1 {price[2]} equals
                 </Typography>
                 <Typography variant="h5" component="h2">
                   {`${price[0]}`}
