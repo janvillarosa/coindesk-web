@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route } from 'react-router';
-import { BitcoinPricelist } from './components/BitcoinPricelist';
+import { Home } from './components/Home';
 
 export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <Route exact path='/' component={BitcoinPricelist} />
+      <div style={{ padding: '50px' }}>
+        <Route exact path='/' component={Home} />
       </div>
     );
   }
