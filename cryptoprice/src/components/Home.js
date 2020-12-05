@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { BitcoinPricelist } from './BitcoinPricelist';
+import { PriceChart } from './PriceChart';
 import * as SignalR from '@aspnet/signalr';
 import moment from 'moment';
 
 export class Home extends Component {
   constructor(props) {
     super(props);
+    this.priceChart = React.createRef();
     this.state = {
       ethPrices: [],
       btcPrices: []
@@ -21,7 +23,6 @@ export class Home extends Component {
         this.setState({ prices: this.PushPriceData(recievedPrice, this.state.ethPrices) });
       }
     });
-
     this.InitialiseHub();
   }
 
@@ -37,7 +38,7 @@ export class Home extends Component {
     });
 
     return await response.json();
-  };
+  }
 
   InitialiseHub = () => {
     const hubConnection = new SignalR.HubConnectionBuilder().withUrl("https:///localhost:5001/coinhub").build();
@@ -56,7 +57,7 @@ export class Home extends Component {
         }
       })
     })
-  };
+  }
 
   PushPriceData = (recievedPrice, prices) => {
     const price = `${parseFloat(recievedPrice.value).toFixed(2)}`;
@@ -66,14 +67,20 @@ export class Home extends Component {
       prices.shift();
     }
     prices.push([price, date, coin]);
+    this.priceChart.current.RefreshChart();
     return prices;
-  };
+  }
 
   render() {
     return (
-      <div style={{ display: 'flex' }}>
-        <BitcoinPricelist prices={this.state.btcPrices} currency={"Bitcoin"} />
-        <BitcoinPricelist prices={this.state.ethPrices} currency={"Ethereum"} />
+      <div>
+        <div style={{ display: 'block' }}>
+          <BitcoinPricelist prices={this.state.btcPrices} currency={"Bitcoin (BTC)"} />
+          <BitcoinPricelist prices={this.state.ethPrices} currency={"Ethereum (ETH)"} />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <PriceChart ethPrices={this.state.ethPrices} btcPrices={this.state.btcPrices} ref={this.priceChart} />
+        </div>
       </div>
     );
   }

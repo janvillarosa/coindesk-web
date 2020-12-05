@@ -29,7 +29,6 @@ export class BitcoinPricelist extends Component {
 
   render() {
     const classes = this.useStyles();
-    console.log(classes);
 
     return (
       <div style={{ width: '100%', textAlign: 'center' }}>
@@ -37,8 +36,6 @@ export class BitcoinPricelist extends Component {
         <Grid
           container
           spacing={0}
-          direction="column"
-          alignItems="center"
           justify="center"
         >
           {this.props.prices.slice().reverse().map((price, index) => (
