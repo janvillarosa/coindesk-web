@@ -31,12 +31,11 @@ export class BitcoinPricelist extends Component {
     const classes = this.useStyles();
 
     return (
-      <div style={{ width: '100%', textAlign: 'center' }}>
+      <div style={{ width: '100%' }}>
         <h1>{this.props.currency}</h1>
         <Grid
           container
-          spacing={0}
-          justify="center"
+          spacing={3}
         >
           {this.props.prices.slice().reverse().map((price, index) => (
             <Grid item key={index}>

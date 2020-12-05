@@ -63,7 +63,7 @@ export class Home extends Component {
     const price = `${parseFloat(recievedPrice.value).toFixed(2)}`;
     const date = moment(recievedPrice.date).format('LTS');
     const coin = recievedPrice.currency;
-    if (prices.length === 5) {
+    if (prices.length === 6) {
       prices.shift();
     }
     prices.push([price, date, coin]);
