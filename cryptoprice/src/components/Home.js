@@ -61,7 +61,7 @@ export class Home extends Component {
 
   PushPriceData = (recievedPrice, prices) => {
     const price = `${parseFloat(recievedPrice.value).toFixed(2)}`;
-    const date = moment(recievedPrice.date).format('LT');
+    const date = moment(recievedPrice.date).format('LTS');
     const coin = recievedPrice.currency;
     if (prices.length === 5) {
       prices.shift();
@@ -78,7 +78,7 @@ export class Home extends Component {
           <BitcoinPricelist prices={this.state.btcPrices} currency={"Bitcoin (BTC)"} />
           <BitcoinPricelist prices={this.state.ethPrices} currency={"Ethereum (ETH)"} />
         </div>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', marginTop: "50px" }}>
           <PriceChart ethPrices={this.state.ethPrices} btcPrices={this.state.btcPrices} ref={this.priceChart} />
         </div>
       </div>

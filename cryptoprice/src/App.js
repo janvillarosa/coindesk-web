@@ -7,7 +7,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div style={{ padding: '50px' }}>
+      <div style={{ padding: '20px 15%' }}>
         <Route exact path='/' component={Home} />
       </div>
     );

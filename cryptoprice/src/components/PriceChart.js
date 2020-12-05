@@ -35,7 +35,7 @@ export class PriceChart extends Component {
     const options = {
       animationEnabled: true,
       title: {
-        text: "Coin Prices"
+        text: "Price of Crypto Over Time"
       },
       axisY: {
         title: "Price in NZD",
